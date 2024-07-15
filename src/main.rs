@@ -1,18 +1,19 @@
 mod route;
+use actix_web::middleware::Logger;
+use actix_web::{ App, HttpServer, web};
+use env_logger::Env;
+use handlebars::{DirectorySourceOptions, Handlebars};
 use route::echo;
 use route::home::{ home , news};
-use handlebars::{DirectorySourceOptions, Handlebars};
-use actix_web::{ App, HttpServer, web};
-use actix_web::middleware::Logger;
-use env_logger::Env;
+use route::static_file::css;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     env_logger::init_from_env(Env::default().default_filter_or("info"));
 
     let mut handlebars = Handlebars::new();
-    handlebars.set_dev_mode(true);
 
+    handlebars.set_dev_mode(true);
     handlebars
         .register_templates_directory(
             "templates",
@@ -35,6 +36,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(Logger::new("%a %{User-Agent}i"))
             .app_data(handlebars_ref.clone())
             .service(home)
+            .service(css)
             .service(news)
             .service(echo)
     })
