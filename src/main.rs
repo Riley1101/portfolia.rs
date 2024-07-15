@@ -1,0 +1,41 @@
+mod route;
+use route::echo;
+use route::home::{ home , news};
+use handlebars::{DirectorySourceOptions, Handlebars};
+use actix_web::{ App, HttpServer, web};
+
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+
+    let mut handlebars = Handlebars::new();
+    handlebars.set_dev_mode(true);
+
+    handlebars
+        .register_templates_directory(
+            "templates",
+            DirectorySourceOptions {
+                tpl_extension: ".html".to_owned(),
+                hidden: false,
+                temporary: false,
+            },
+        )
+        .unwrap();
+
+    handlebars.register_partial("header", "{{ @partials/header }}").unwrap();
+
+    let handlebars_ref = web::Data::new(handlebars);
+
+    HttpServer::new(move || {
+        App::new()
+            .app_data(handlebars_ref.clone())
+            .service(home)
+            .service(news)
+            .service(echo)
+    })
+    .workers(4)
+    .bind(("127.0.0.1", 8080))?
+    .run()
+    .await
+}
+
