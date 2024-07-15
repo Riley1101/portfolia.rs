@@ -23,6 +23,7 @@ async fn main() -> std::io::Result<()> {
         .unwrap();
 
     handlebars.register_partial("header", "{{ @partials/header }}").unwrap();
+    handlebars.register_partial("footer", "{{ @partials/footer }}").unwrap();
 
     let handlebars_ref = web::Data::new(handlebars);
 

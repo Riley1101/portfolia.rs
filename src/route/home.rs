@@ -21,8 +21,9 @@ pub async fn news() -> Result<HttpResponse, Error> {
 async fn home(hb: web::Data<Handlebars<'_>>) -> impl Responder {
     let data = json!({
         "name": "Handlebars",
-        // partials
-        "header":"partials/layout"
+        "layout":"partials/layout",
+        "header":"partials/header",
+        "footer":"partials/footer",
     });
     let body = hb.render("index", &data).unwrap();
     web::Html::new(body)
