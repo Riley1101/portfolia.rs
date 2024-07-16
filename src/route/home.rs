@@ -24,6 +24,7 @@ async fn home(hb: web::Data<Handlebars<'_>>) -> impl Responder {
         "layout":"partials/layout",
         "header":"partials/header",
         "footer":"partials/footer",
+        "nav-aside":"partials/nav-aside",
     });
     let body = hb.render("index", &data).unwrap();
     web::Html::new(body)

@@ -1,6 +1,6 @@
 mod route;
 use actix_web::middleware::Logger;
-use actix_web::{ App, HttpServer, web};
+use actix_web::{ App, HttpServer, web, middleware};
 use env_logger::Env;
 use handlebars::{DirectorySourceOptions, Handlebars};
 use route::echo;
@@ -27,11 +27,16 @@ async fn main() -> std::io::Result<()> {
 
     handlebars.register_partial("header", "{{ @partials/header }}").unwrap();
     handlebars.register_partial("footer", "{{ @partials/footer }}").unwrap();
+    handlebars.register_partial("nav-aside", "{{ @partials/nav-aside }}").unwrap();
 
     let handlebars_ref = web::Data::new(handlebars);
 
     HttpServer::new(move || {
         App::new()
+            .wrap(middleware::DefaultHeaders::new()
+                .add(("X-Version", "0.2"))
+                
+            )
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
             .app_data(handlebars_ref.clone())
