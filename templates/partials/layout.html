@@ -1,7 +1,11 @@
 <html>
-  {{> (lookup this "header")}}
+  <head> 
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="/static/tailwind.css">
+  </head>
   <body>
-    {{> page}}
+    {{> (lookup this "header")}} 
+    {{> page}} 
+    {{> (lookup this "footer")}}
   </body>
-  {{> (lookup this "footer")}}
 </html>

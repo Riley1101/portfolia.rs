@@ -5,7 +5,7 @@ use env_logger::Env;
 use handlebars::{DirectorySourceOptions, Handlebars};
 use route::echo;
 use route::home::{ home , news};
-use route::static_file::css;
+use actix_files as fs;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -35,8 +35,8 @@ async fn main() -> std::io::Result<()> {
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
             .app_data(handlebars_ref.clone())
+            .service(fs::Files::new("/static", "static"))
             .service(home)
-            .service(css)
             .service(news)
             .service(echo)
     })
