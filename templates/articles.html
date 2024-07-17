@@ -1,0 +1,20 @@
+{{#*inline "page"}}
+<div class="page-container">
+  <div class="page-left">
+    <div class="border-b py-4 my-4 border-theme-accent-opaque">
+      <h1 class="mb-4 text-4xl font-bold lg:text-5xl">Articles</h1>
+      <p class="leading-relaxed">
+        Some of my latest articles on web development, computer science, and
+        more.
+      </p>
+    </div>
+    <div class="block md:hidden row-start-1 lg:col-start-2">
+      {{> (lookup this "categories")}}
+    </div>
+    <ArticleTimeLine current="{searchParams?.category}" />
+  </div>
+  <div class="page-right hidden md:block row-start-1 lg:col-start-2">
+    {{> (lookup this "categories")}}
+  </div>
+</div>
+{{/inline}} {{> (lookup this "layout")}}

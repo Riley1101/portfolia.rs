@@ -34,6 +34,7 @@ async fn main() -> std::io::Result<()> {
     handlebars.register_partial("projects", "{{ @partials/projects }}").unwrap();
     handlebars.register_partial("newsletter", "{{ @partials/newsletter }}").unwrap();
     handlebars.register_partial("article-series", "{{ @partials/article-series }}").unwrap();
+    handlebars.register_partial("categories", "{{ @partials/categories }}").unwrap();
 
     let handlebars_ref = web::Data::new(handlebars);
 

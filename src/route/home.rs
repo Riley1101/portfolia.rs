@@ -33,6 +33,7 @@ async fn about(hb: web::Data<Handlebars<'_>>) -> impl Responder {
         "footer":"partials/footer",
 
         "nav-aside":"partials/nav-aside",
+
     });
     let body = hb.render("about", &data).unwrap();
     web::Html::new(body)
@@ -46,8 +47,9 @@ async fn articles(hb: web::Data<Handlebars<'_>>) -> impl Responder {
         "header":"partials/header",
         "footer":"partials/footer",
         "nav-aside":"partials/nav-aside",
+        "categories":"partials/categories",
     });
-    let body = hb.render("about", &data).unwrap();
+    let body = hb.render("articles", &data).unwrap();
     web::Html::new(body)
 }
 
