@@ -4,7 +4,7 @@ use actix_web::{ App, HttpServer, web, middleware};
 use env_logger::Env;
 use handlebars::{DirectorySourceOptions, Handlebars};
 use route::echo;
-use route::home::{ home , news};
+use route::home::{ home , about, articles, snippets, videos};
 use actix_files as fs;
 
 #[actix_web::main]
@@ -29,6 +29,12 @@ async fn main() -> std::io::Result<()> {
     handlebars.register_partial("footer", "{{ @partials/footer }}").unwrap();
     handlebars.register_partial("nav-aside", "{{ @partials/nav-aside }}").unwrap();
 
+    handlebars.register_partial("home-intro", "{{ @partials/home-intro }}").unwrap();
+    handlebars.register_partial("latest-articles", "{{ @partials/latest-articles }}").unwrap();
+    handlebars.register_partial("projects", "{{ @partials/projects }}").unwrap();
+    handlebars.register_partial("newsletter", "{{ @partials/newsletter }}").unwrap();
+    handlebars.register_partial("article-series", "{{ @partials/article-series }}").unwrap();
+
     let handlebars_ref = web::Data::new(handlebars);
 
     HttpServer::new(move || {
@@ -42,7 +48,10 @@ async fn main() -> std::io::Result<()> {
             .app_data(handlebars_ref.clone())
             .service(fs::Files::new("/static", "static"))
             .service(home)
-            .service(news)
+            .service(about)
+            .service(articles)
+            .service(snippets)
+            .service(videos)
             .service(echo)
     })
     .workers(4)

@@ -1,7 +1,11 @@
 {{#*inline "page"}}
-<div class="page-container">
-  <h1 class="text-3xl text-blue-500">Home</h1>
-  <p>Welcome to my website!</p>
+<div class="page-container gap-4">
+  <div class="w-full flex flex-col gap-8">
+    {{> (lookup this "home-intro")}} 
+    {{> (lookup this "latest-articles")}} 
+    {{> (lookup this "projects")}} 
+    {{> (lookup this "newsletter")}} 
+    {{> (lookup this "article-series")}}
+  </div>
 </div>
-{{/inline}} 
-{{> (lookup this "layout")}}
+{{/inline}} {{> (lookup this "layout")}}

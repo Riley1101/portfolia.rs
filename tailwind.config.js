@@ -2,7 +2,7 @@
 const { addDynamicIconSelectors } = require("@iconify/tailwind");
 
 module.exports = {
-  content: ["./templates/**/*.html"],
+  content: ["./templates/**/*.html", "./templates/**/*.css"],
   theme: {
     extend: {
       gridTemplateColumns: {

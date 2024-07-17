@@ -8,10 +8,25 @@ importers:
 
   .:
     dependencies:
+      '@iconify-json/system-uicons':
+        specifier: ^1.1.12
+        version: 1.1.12
       '@tailwindcss/container-queries':
         specifier: ^0.1.1
         version: 0.1.1(tailwindcss@3.4.5)
     devDependencies:
+      '@iconify-json/charm':
+        specifier: ^1.1.12
+        version: 1.1.12
+      '@iconify-json/devicon':
+        specifier: ^1.1.47
+        version: 1.1.47
+      '@iconify-json/flowbite':
+        specifier: ^1.1.5
+        version: 1.1.5
+      '@iconify-json/pajamas':
+        specifier: ^1.1.47
+        version: 1.1.47
       '@iconify-json/ph':
         specifier: ^1.1.13
         version: 1.1.13
@@ -34,8 +49,23 @@ packages:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
 
+  '@iconify-json/charm@1.1.12':
+    resolution: {integrity: sha512-a/O7GM2ENm4I+mSddGaHdPNh/RHCbLT4Nlv6Dfgfg+VXTkwjmvzHB1kt3YUB9089UMG6Co3KU2LHXVrCAeuvnw==}
+
+  '@iconify-json/devicon@1.1.47':
+    resolution: {integrity: sha512-d2ZTn4jnNeGZYWcPJzl0EiHvLTJnMr+2WurQtC4U6/v4uKVOiL1oX+BnR0lLwNcP/+Q96A3WWdZE6P/kR7hn3g==}
+
+  '@iconify-json/flowbite@1.1.5':
+    resolution: {integrity: sha512-XFiuWm/Mk2tKhmMjNsTC6a5Er+SkSjiCvqejN309s2nyF3yoXVBPGN/sN6SEFLfK8jJ3W8CtaKF+EdRBornddg==}
+
+  '@iconify-json/pajamas@1.1.47':
+    resolution: {integrity: sha512-y0OyB9o1gAs506zmhryd1FGnri03VsCoq3xhCl+F0r92RGmTQfLFHHTKOr3bE2BU4fR/AVBKmyZCxVbhNb1nvA==}
+
   '@iconify-json/ph@1.1.13':
     resolution: {integrity: sha512-xtM4JJ63HCKj09WRqrBswXiHrpliBlqboWSZH8odcmqYXbvIFceU9/Til4V+MQr6+MoUC+KB72cxhky2+A6r/g==}
+
+  '@iconify-json/system-uicons@1.1.12':
+    resolution: {integrity: sha512-W3laFVxVNG4qmS8tsSMt2kQMVK+6i1hZOxZTxSaWQWRnmki4qp9rGHnMfRhxBqZ7SQoIrG3toodooK+y4qoBcQ==}
 
   '@iconify/tailwind@1.1.1':
     resolution: {integrity: sha512-4mmA//qjZigv7D4KlqcVSYTqfRIJzyts2/lSCAJfCL0rVMIE76+ifJnaE5jxCo1+nYGBF8FsFo0qFOs+sX4EnA==}
@@ -506,7 +536,27 @@ snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
 
+  '@iconify-json/charm@1.1.12':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/devicon@1.1.47':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/flowbite@1.1.5':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/pajamas@1.1.47':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify-json/ph@1.1.13':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/system-uicons@1.1.12':
     dependencies:
       '@iconify/types': 2.0.0
 
