@@ -1,0 +1,39 @@
+{{#*inline "page"}}
+<div class="page-container gap-4">
+  <div class="page-left">
+    <div class="border-b py-4 my-4 border-theme-accent-opaque">
+      <h1 class="mb-4 text-4xl font-bold lg:text-5xl">Snippets</h1>
+      <p class="leading-relaxed">My sharing videos on Youtube.</p>
+    </div>
+
+    <div class="@container">
+      <div
+        class="relative grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] grid-flow-dense gap-4 md:gap-6"
+      >
+        <a
+          href="https://www.youtube.com/playlist?list=data.id"
+          target="_blank"
+          class="group flex flex-col gap-4 transition-all duration-500 rounded-md cursor-pointer"
+        >
+          <image
+            class="w-full object-cover rounded-sm brightness-75 blur-[3px] group-hover:blur-0 group-hover:brightness-100 transition-all duration-500"
+            src="https://arkar.space/_next/image?url=https%3A%2F%2Fi.ytimg.com%2Fvi%2Fb0A4iSVuWGk%2Fsddefault.jpg&w=256&q=75"
+            alt="{data.snippet.title}"
+            width="200"
+            height="200"
+          ></image>
+          <div>
+            <h2 class="text-lg font-bold text-white">Next.js in 2022</h2>
+            <span class="block my-1 text-sm text-theme-primary">
+              July 12, 2021
+            </span>
+            <p class="my-2 text-sm text-gray-400 line-clamp-3">
+              Next.js is a React framework that is used to build static.
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{{/inline}} {{> (lookup this "layout")}}

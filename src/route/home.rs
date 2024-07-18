@@ -64,7 +64,7 @@ async fn snippets(hb: web::Data<Handlebars<'_>>) -> impl Responder {
         "footer":"partials/footer",
         "nav-aside":"partials/nav-aside",
     });
-    let body = hb.render("about", &data).unwrap();
+    let body = hb.render("snippets", &data).unwrap();
     web::Html::new(body)
 }
 
@@ -77,6 +77,6 @@ async fn videos(hb: web::Data<Handlebars<'_>>) -> impl Responder {
         "footer":"partials/footer",
         "nav-aside":"partials/nav-aside",
     });
-    let body = hb.render("about", &data).unwrap();
+    let body = hb.render("videos", &data).unwrap();
     web::Html::new(body)
 }

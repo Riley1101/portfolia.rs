@@ -1,0 +1,76 @@
+{{#*inline "page"}}
+<div class="page-container gap-4">
+  <div class="page-left">
+    <div class="border-b py-4 my-4 border-theme-accent-opaque">
+      <h1 class="mb-4 text-4xl font-bold lg:text-5xl">Snippets</h1>
+      <p class="leading-relaxed">
+        Some of the code snippets that I came across in my explore or the
+        internet !
+      </p>
+    </div>
+
+    <div class="flex flex-col">
+      <div
+        class="flex items-center px-4 my-4 border rounded-md border-theme-accent-opaque group hover:from-theme-accent-opaque bg-gradient-to-l"
+      >
+        <span
+          class="icon-[ph--terminal-window] w-6 h-6 block group-focus-within:text-theme-accent group"
+        ></span>
+        <input
+          type="text"
+          placeholder="Search"
+          class="w-full px-4 py-2 bg-transparent rounded-md outline-none text-bg-theme-accent"
+        />
+      </div>
+      <div class="relative flex flex-col gap-4 pb-4">
+        <a
+          href="/snippets/"
+          class="relative overflow-hidden p-4 transition-all duration-500 border rounded-md cursor-pointer border-theme-accent hover:border-theme-primary border-opacity-10 hover:border-opacity-20"
+        >
+          <div
+            style="opacity: 0.2"
+            class="w-[15%] top-[20%] left-[0%] transform-center hidden translate-y-[-1/2] aspect-square absolute translate-x-[-1/2] gradient-one"
+          ></div>
+          <h2 class="text-base text-white font-semibold mb-2">
+            Generating types in TS
+          </h2>
+          <div class="flex justify-between">
+            <span class="block my-1 text-sm text-theme-primary">
+              July 12, 2021
+            </span>
+            <div class="flex items-center gap-2">
+              <div>
+                <span class="text-sm">React</span>
+                <span class="text-theme-accent"> /</span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a
+          href="/snippets"
+          class="relative overflow-hidden p-4 transition-all duration-500 border rounded-md cursor-pointer border-theme-accent hover:border-theme-primary border-opacity-10 hover:border-opacity-20"
+        >
+          <div
+            style="opacity: 0.2"
+            class="w-[15%] top-[20%] left-[0%] transform-center hidden translate-y-[-1/2] aspect-square absolute translate-x-[-1/2] gradient-one"
+          ></div>
+          <h2 class="text-base text-white font-semibold mb-2">
+            Generating types in TS
+          </h2>
+          <div class="flex justify-between">
+            <span class="block my-1 text-sm text-theme-primary">
+              July 12, 2021
+            </span>
+            <div class="flex items-center gap-2">
+              <div>
+                <span class="text-sm">React</span>
+                <span class="text-theme-accent"> /</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{{/inline}} {{> (lookup this "layout")}}
