@@ -1,30 +1,18 @@
 mod route;
-mod sanity;
-
-extern crate sanity as sn;
-
-use std::sync::Mutex;
 use actix_web::middleware::Logger;
 use actix_web::{ App, HttpServer, web, middleware};
 use env_logger::Env;
 use handlebars::{DirectorySourceOptions, Handlebars};
 use route::echo;
 use route::home::{ home , about, articles, snippets, videos};
+use route::articles::article_detail;
 use actix_files as fs;
-use sanity::client::SanityClient;
-
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     env_logger::init_from_env(Env::default().default_filter_or("info"));
 
     let mut handlebars = Handlebars::new();
-    let client = SanityClient::new(
-        SANITY_PROJECT_ID.to_string(),
-        SANITY_DATA_SET.to_string(),
-        SANITY_TOKEN.to_string(),
-        SANITY_CDN,
-    );
     handlebars.set_dev_mode(true);
     handlebars
         .register_templates_directory(
@@ -49,7 +37,6 @@ async fn main() -> std::io::Result<()> {
     handlebars.register_partial("categories", "{{ @partials/categories }}").unwrap();
 
     let handlebars_ref = web::Data::new(handlebars);
-    let client_ref = web::Data::new(Mutex::new(client));
 
 
     HttpServer::new(move || {
@@ -60,13 +47,13 @@ async fn main() -> std::io::Result<()> {
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
             .app_data(handlebars_ref.clone())
-            .app_data(client_ref.clone())
             .service(fs::Files::new("/static", "static"))
             .service(home)
             .service(about)
             .service(articles)
             .service(snippets)
             .service(videos)
+            .service(article_detail)
             .service(echo)
     })
     .workers(4)

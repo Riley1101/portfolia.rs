@@ -1,16 +1,12 @@
 use serde_json::json;
 use handlebars::Handlebars;
-use std::sync::Mutex;
 use actix_web::{
     get,
     web, Responder, 
 };
 
-use crate::sanity::client::{ SanityClient , Client};
-
 #[get("/")]
-async fn home(hb: web::Data<Handlebars<'_>>,sn: web::Data<Mutex<SanityClient>>) -> impl Responder {
-    sn.lock().unwrap().query();
+async fn home(hb: web::Data<Handlebars<'_>>) -> impl Responder {
     let data = json!({
         "name": "Handlebars",
         "layout":"partials/layout",
@@ -28,14 +24,12 @@ async fn home(hb: web::Data<Handlebars<'_>>,sn: web::Data<Mutex<SanityClient>>) 
 }
 
 #[get("/about")]
-async fn about(hb: web::Data<Handlebars<'_>>,sn: web::Data<Mutex<SanityClient>>) -> impl Responder {
-    sn.lock().unwrap().query();
+async fn about(hb: web::Data<Handlebars<'_>>) -> impl Responder {
     let data = json!({
         "name": "Handlebars",
         "layout":"partials/layout",
         "header":"partials/header",
         "footer":"partials/footer",
-
         "nav-aside":"partials/nav-aside",
 
     });
@@ -44,8 +38,7 @@ async fn about(hb: web::Data<Handlebars<'_>>,sn: web::Data<Mutex<SanityClient>>)
 }
 
 #[get("/articles")]
-async fn articles(hb: web::Data<Handlebars<'_>>,sn: web::Data<Mutex<SanityClient>>) -> impl Responder {
-    sn.lock().unwrap().query();
+async fn articles(hb: web::Data<Handlebars<'_>>) -> impl Responder {
     let data = json!({
         "name": "Handlebars",
         "layout":"partials/layout",
