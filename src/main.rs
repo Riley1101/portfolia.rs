@@ -1,5 +1,7 @@
 mod route;
 mod database;
+mod markdown;
+
 use actix_web::middleware::Logger;
 use actix_web::{ App, HttpServer, web, middleware};
 use env_logger::Env;
