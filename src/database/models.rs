@@ -1,8 +1,9 @@
+use super::schema;
 use chrono::NaiveDateTime;
 use diesel::prelude::*;
 
 #[derive(Queryable, Selectable)]
-#[diesel(table_name = crate::schema::articles)]
+#[diesel(table_name = schema::articles)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Article {
     pub id: i32,

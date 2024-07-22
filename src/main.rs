@@ -1,32 +1,21 @@
 mod route;
+mod database;
 use actix_web::middleware::Logger;
 use actix_web::{ App, HttpServer, web, middleware};
 use env_logger::Env;
 use handlebars::{DirectorySourceOptions, Handlebars};
+use database::client::DatabaseConfig;
 use route::echo;
 use route::home::{ home , about, articles, snippets, videos};
 use route::articles::article_detail;
 use actix_files as fs;
 
-use diesel::pg::PgConnection;
-use diesel::prelude::*;
-use dotenvy::dotenv;
-use std::env;
-
-pub fn establish_connection() -> PgConnection {
-    dotenv().ok();
-
-    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-    PgConnection::establish(&database_url)
-        .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
-}
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     env_logger::init_from_env(Env::default().default_filter_or("info"));
 
-    let conn = establish_connection();
-
+    let db = DatabaseConfig::new();
     let mut handlebars = Handlebars::new();
 
     handlebars.set_dev_mode(true);
@@ -41,10 +30,11 @@ async fn main() -> std::io::Result<()> {
         )
         .unwrap();
 
+    // layouts
     handlebars.register_partial("header", "{{ @partials/header }}").unwrap();
     handlebars.register_partial("footer", "{{ @partials/footer }}").unwrap();
     handlebars.register_partial("nav-aside", "{{ @partials/nav-aside }}").unwrap();
-
+    // partials
     handlebars.register_partial("home-intro", "{{ @partials/home-intro }}").unwrap();
     handlebars.register_partial("latest-articles", "{{ @partials/latest-articles }}").unwrap();
     handlebars.register_partial("projects", "{{ @partials/projects }}").unwrap();
@@ -53,6 +43,7 @@ async fn main() -> std::io::Result<()> {
     handlebars.register_partial("categories", "{{ @partials/categories }}").unwrap();
 
     let handlebars_ref = web::Data::new(handlebars);
+    let pool_ref =  web::Data::new(db.pool);
 
 
     HttpServer::new(move || {
@@ -63,6 +54,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
             .app_data(handlebars_ref.clone())
+            .app_data(pool_ref.clone())
             .service(fs::Files::new("/static", "static"))
             .service(home)
             .service(about)
