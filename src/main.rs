@@ -1,7 +1,7 @@
 mod route;
 mod database;
-mod markdown;
 
+use diesel::{r2d2, PgConnection};
 use actix_web::middleware::Logger;
 use actix_web::{ App, HttpServer, web, middleware};
 use env_logger::Env;
@@ -46,7 +46,6 @@ async fn main() -> std::io::Result<()> {
 
     let handlebars_ref = web::Data::new(handlebars);
     let pool_ref =  web::Data::new(db.pool);
-
 
     HttpServer::new(move || {
         App::new()
