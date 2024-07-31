@@ -1,14 +1,14 @@
 mod route;
 mod database;
 
-use diesel::{r2d2, PgConnection};
 use actix_web::middleware::Logger;
 use actix_web::{ App, HttpServer, web, middleware};
 use env_logger::Env;
 use handlebars::{DirectorySourceOptions, Handlebars};
 use database::client::DatabaseConfig;
 use route::echo;
-use route::home::{ home , about, articles, snippets, videos};
+use route::home::{ home , about, snippets, videos};
+use route::articles::articles;
 use route::articles::article_detail;
 use actix_files as fs;
 

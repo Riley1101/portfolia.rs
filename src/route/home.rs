@@ -37,22 +37,6 @@ async fn about(hb: web::Data<Handlebars<'_>>) -> impl Responder {
     web::Html::new(body)
 }
 
-#[get("/articles")]
-async fn articles(hb: web::Data<Handlebars<'_>>) -> impl Responder {
-    let data = json!({
-        "name": "Handlebars",
-        "layout":"partials/layout",
-        "header":"partials/header",
-        "footer":"partials/footer",
-        "nav-aside":"partials/nav-aside",
-        "categories":"partials/categories",
-    });
-    let body = hb.render("articles", &data).unwrap();
-    web::Html::new(body)
-}
-
-
-
 #[get("/snippets")]
 async fn snippets(hb: web::Data<Handlebars<'_>>) -> impl Responder {
     let data = json!({
