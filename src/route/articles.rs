@@ -6,7 +6,7 @@ use handlebars::to_json;
 use crate::database::models::{Article, ArticleCRUD, DbPool};
 
 
-#[get("/article/{slug}")] 
+#[get("/articles/{slug}")] 
 async fn article_detail(
     path: web::Path<String>, 
     hb:web::Data<Handlebars<'_>>,

@@ -20,6 +20,8 @@ diesel::table! {
         published -> Bool,
         createdat -> Timestamp,
         updatedat -> Timestamp,
+        #[max_length = 255]
+        slug -> Nullable<Varchar>,
     }
 }
 

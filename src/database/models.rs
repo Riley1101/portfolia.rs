@@ -18,6 +18,7 @@ pub type PoolConnection = r2d2::PooledConnection<r2d2::ConnectionManager<PgConne
 pub struct Article {
     pub id: i32,
     pub title: String,
+    pub slug: Option<String>,
     pub body: String,
     pub published: bool,
     pub thumbnail_image: Option<String>,
@@ -36,6 +37,7 @@ impl Serialize for Article {
         state.serialize_field("body", &self.body)?;
         state.serialize_field("published", &self.published)?;
         state.serialize_field("thumbnail_image", &self.thumbnail_image)?;
+        state.serialize_field("slug", &self.slug)?;
         let createdat = self.createdat.format("%Y-%m-%d").to_string();
         state.serialize_field("createdat", &createdat)?;
         let updatedat = self.updatedat.format("%Y-%m-%d").to_string();
