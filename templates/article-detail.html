@@ -1,8 +1,28 @@
 {{#*inline "page"}}
 <div class="page-container gap-4">
   <div class="w-full flex flex-col gap-8">
-    {{ title }}
-    {{ slug }}
+    <div class="py-8">
+      <h1 class="font-bold text-white title">{{article.title}}</h1>
+      <div class="flex items-center justify-between">
+        <span class="block my-4 text-theme-accent">
+          {{article.updatedat}}
+        </span>
+        <span class="block text-sm font-bold text-theme-primary"> Arkar </span>
+      </div>
+      <!--<div class="flex gap-4 my-4">-->
+      <!--  {props?.categories && props?.categories.map((itm) => (-->
+      <!--  <span-->
+      <!--    key="{itm}"-->
+      <!--    class="block px-2 py-1 text-sm rounded-lg cursor-pointer bg-theme-primary-opaque"-->
+      <!--  >-->
+      <!--    {itm}-->
+      <!--  </span>-->
+      <!--  ))}-->
+      <!--</div>-->
+      <p class="leading-loose text-base text-theme-body">
+        {{ article.description }}
+      </p>
+    </div>
   </div>
 </div>
 {{/inline}} {{> (lookup this "layout")}}

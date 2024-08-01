@@ -10,9 +10,11 @@ use crate::database::models::{Article, ArticleCRUD, DbPool};
 async fn article_detail(
     path: web::Path<String>, 
     hb:web::Data<Handlebars<'_>>,
-//    pool: web::Data<DbPool>,
+    pool: web::Data<DbPool>,
 ) -> impl Responder{
 
+    let conn = pool.get().expect("couldn't get db connection from pool");
+    let article = Article::get_article_by_slug(conn, path.clone());
     let data = json!({
         "name": "Handlebars",
         "layout":"partials/layout",
@@ -20,6 +22,7 @@ async fn article_detail(
         "footer":"partials/footer",
         "nav-aside":"partials/nav-aside",
         "slug": *path,
+        "article": to_json(article),
     });
     let body = hb.render("article-detail", &data).unwrap();
     web::Html::new(body)

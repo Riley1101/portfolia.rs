@@ -1,16 +1,20 @@
 #![allow(dead_code)]
-use core::fmt;
-use std::fmt::{Display, Formatter};
-
 use super::schema;
+use crate::articles;
 use chrono::NaiveDateTime;
+use core::fmt;
+use diesel::dsl::{AsSelect, Select};
+use diesel::pg::Pg;
 use diesel::{prelude::*, r2d2};
 use diesel::{ExpressionMethods, QueryDsl, RunQueryDsl, SelectableHelper};
 use serde::ser::{Serialize, SerializeStruct};
+use std::fmt::{Display, Formatter};
 
 pub type DbPool = r2d2::Pool<r2d2::ConnectionManager<PgConnection>>;
 
 pub type PoolConnection = r2d2::PooledConnection<r2d2::ConnectionManager<PgConnection>>;
+
+pub type All = Select<articles, AsSelect<Article, Pg>>;
 
 #[derive(Debug, Queryable, Selectable)]
 #[diesel(table_name = schema::articles)]
@@ -59,6 +63,7 @@ impl Display for Article {
 pub trait ArticleCRUD {
     fn get_all_articles(conn: PoolConnection) -> Vec<Article>;
     fn get_all_article_preview(conn: PoolConnection) -> Article;
+    fn get_article_by_slug(conn: PoolConnection, slug: String) -> Article;
 }
 
 impl ArticleCRUD for Article {
@@ -76,6 +81,15 @@ impl ArticleCRUD for Article {
     fn get_all_article_preview(mut conn: PoolConnection) -> Article {
         use schema::articles::dsl::*;
         articles
+            .select(Article::as_select())
+            .first(&mut conn)
+            .expect("error loading posts")
+    }
+
+    fn get_article_by_slug(mut conn: PoolConnection, article_slug: String) -> Article {
+        use schema::articles::dsl::*;
+        articles
+            .filter(slug.eq(article_slug))
             .select(Article::as_select())
             .first(&mut conn)
             .expect("error loading posts")
