@@ -3,8 +3,8 @@ use handlebars::Handlebars;
 use serde_json::json;
 use handlebars::to_json;
 
-use crate::blocks::contents::{Block, BlockType};
-use crate::blocks::renderer::render_paragraph;
+use crate::blocks::contents::{Block, BlockType, Mark};
+use crate::blocks::renderer::render_text;
 use crate::database::models::{Article, ArticleCRUD, DbPool};
 
 
@@ -18,8 +18,8 @@ async fn article_detail(
     let conn = pool.get().expect("couldn't get db connection from pool");
     let article = Article::get_article_by_slug(conn, path.clone());
 
-    let block = Block::new ("lorem is cool and i love it ".to_string(), BlockType::Text);
-    let render_block = render_paragraph(block);
+    let block = Block::new ("lorem is cool and i love it ".to_string(), BlockType::Text,Some(Mark::Normal));
+    let render_block = render_text(block);
     let data = json!({
         "name": "Handlebars",
         "layout":"partials/layout",
