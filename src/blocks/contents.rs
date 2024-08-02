@@ -1,17 +1,16 @@
 #![allow(dead_code)]
 
 use serde::ser::{Serialize, SerializeStruct};
+use uuid::Uuid;
 
 pub enum BlockType {
-    Text(String),
-    Code(String),
-    Image(String),
-    Quote(String),
-    List(Vec<String>),
-    Heading(String),
-    Link(String),
-    Html(String),
-    Custom(String),
+    Text,
+    Code,
+    Image,
+    Quote,
+    Heading,
+    Link,
+    Html,
 }
 
 impl Serialize for BlockType {
@@ -21,15 +20,13 @@ impl Serialize for BlockType {
     {
         let mut state = serializer.serialize_struct("BlockType", 2)?;
         let name = match self {
-            BlockType::Text(_) => "text",
-            BlockType::Code(_) => "code",
-            BlockType::Image(_) => "image",
-            BlockType::Quote(_) => "quote",
-            BlockType::List(_) => "list",
-            BlockType::Heading(_) => "heading",
-            BlockType::Link(_) => "link",
-            BlockType::Html(_) => "html",
-            BlockType::Custom(_) => "custom",
+            BlockType::Text => "text",
+            BlockType::Code => "code",
+            BlockType::Image => "image",
+            BlockType::Quote => "quote",
+            BlockType::Heading => "heading",
+            BlockType::Link => "link",
+            BlockType::Html => "html",
         };
         state.serialize_field("name", name)?;
         state.end()
@@ -39,7 +36,17 @@ impl Serialize for BlockType {
 pub struct Block {
     pub content: String,
     pub block_type: BlockType,
-    pub id: i32,
+    pub id: String,
+}
+
+impl Block {
+    pub fn new(content: String, block_type: BlockType) -> Self {
+        Self {
+            content,
+            block_type,
+            id: format!("{}", Uuid::new_v4()),
+        }
+    }
 }
 
 impl Serialize for Block {

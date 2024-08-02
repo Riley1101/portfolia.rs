@@ -22,6 +22,7 @@ diesel::table! {
         updatedat -> Timestamp,
         #[max_length = 255]
         slug -> Nullable<Varchar>,
+        content -> Nullable<Array<Nullable<Jsonb>>>,
     }
 }
 
