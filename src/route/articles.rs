@@ -23,6 +23,7 @@ async fn article_detail(
         "nav-aside":"partials/nav-aside",
         "slug": *path,
         "article": to_json(article),
+        "html":"<h1>Lorem is Cool and I love it</h1>"
     });
     let body = hb.render("article-detail", &data).unwrap();
     web::Html::new(body)
