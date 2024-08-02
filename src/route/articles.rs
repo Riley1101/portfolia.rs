@@ -4,7 +4,7 @@ use serde_json::json;
 use handlebars::to_json;
 
 use crate::blocks::contents::{Block, BlockType, Mark};
-use crate::blocks::renderer::render_text;
+use crate::blocks::renderer::render_block;
 use crate::database::models::{Article, ArticleCRUD, DbPool};
 
 
@@ -19,7 +19,7 @@ async fn article_detail(
     let article = Article::get_article_by_slug(conn, path.clone());
 
     let block = Block::new ("lorem is cool and i love it ".to_string(), BlockType::Text,Some(Mark::Normal));
-    let render_block = render_text(block);
+    let render_block = render_block(block);
     let data = json!({
         "name": "Handlebars",
         "layout":"partials/layout",

@@ -30,16 +30,22 @@ pub fn mark_renderer(block: Option<Mark>) -> String {
     }
 }
 
-pub fn render_text(block: Block) -> BlockResult {
+pub fn render_block(block: Block) -> BlockResult {
     let Block {
         content,
         block_type,
         mark,
         ..
     } = block;
-    let syntax = mark_renderer(mark);
     match block_type {
-        BlockType::Text => BlockResult::Html(format!("<{syntax}>{content}</{syntax}>")),
+        BlockType::Text => {
+            let syntax = mark_renderer(mark);
+            BlockResult::Html(format!("<{syntax}>{content}</{syntax}>"))
+        }
+        BlockType::Code => BlockResult::Html(format!("<pre><code>{content}</code></pre>")),
+        BlockType::Image => BlockResult::Html(format!("<img src='{content}' alt='image' />")),
+        BlockType::Quote => BlockResult::Html(format!("<blockquote>{content}</blockquote>")),
+        BlockType::Link => BlockResult::Html(format!("<a href='{content}'>{content}</a>")),
         _ => BlockResult::Invalid,
     }
 }

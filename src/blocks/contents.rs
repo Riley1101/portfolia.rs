@@ -1,6 +1,6 @@
 #![allow(dead_code)]
-use std::fmt::Display;
 use serde::ser::{Serialize, SerializeStruct};
+use std::fmt::Display;
 use uuid::Uuid;
 
 pub enum Mark {
@@ -53,7 +53,6 @@ pub enum BlockType {
     Code,
     Image,
     Quote,
-    Heading,
     Link,
     Html,
 }
@@ -65,7 +64,6 @@ impl Display for BlockType {
             BlockType::Code => "code",
             BlockType::Image => "image",
             BlockType::Quote => "quote",
-            BlockType::Heading => "heading",
             BlockType::Link => "link",
             BlockType::Html => "html",
         };
@@ -84,7 +82,6 @@ impl Serialize for BlockType {
             BlockType::Code => "code",
             BlockType::Image => "image",
             BlockType::Quote => "quote",
-            BlockType::Heading => "heading",
             BlockType::Link => "link",
             BlockType::Html => "html",
         };
