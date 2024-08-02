@@ -1,4 +1,5 @@
 #![allow(dead_code)]
+use std::fmt::Display;
 
 use serde::ser::{Serialize, SerializeStruct};
 use uuid::Uuid;
@@ -10,6 +11,20 @@ pub enum Mark {
     H4,
     Bold,
     Italic,
+}
+
+impl Display for Mark {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let name = match self {
+            Mark::H1 => "h1",
+            Mark::H2 => "h2",
+            Mark::H3 => "h3",
+            Mark::H4 => "h4",
+            Mark::Bold => "b",
+            Mark::Italic => "i",
+        };
+        write!(f, "{}", name)
+    }
 }
 
 impl Serialize for Mark {
@@ -39,6 +54,21 @@ pub enum BlockType {
     Heading,
     Link,
     Html,
+}
+
+impl Display for BlockType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let name = match self {
+            BlockType::Text => "text",
+            BlockType::Code => "code",
+            BlockType::Image => "image",
+            BlockType::Quote => "quote",
+            BlockType::Heading => "heading",
+            BlockType::Link => "link",
+            BlockType::Html => "html",
+        };
+        write!(f, "{}", name)
+    }
 }
 
 impl Serialize for BlockType {

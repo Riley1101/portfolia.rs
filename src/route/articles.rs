@@ -3,6 +3,8 @@ use handlebars::Handlebars;
 use serde_json::json;
 use handlebars::to_json;
 
+use crate::blocks::contents::{Block, BlockType};
+use crate::blocks::renderer::render_paragraph;
 use crate::database::models::{Article, ArticleCRUD, DbPool};
 
 
@@ -23,8 +25,11 @@ async fn article_detail(
         "nav-aside":"partials/nav-aside",
         "slug": *path,
         "article": to_json(article),
-        "html":"<h1>Lorem is Cool and I love it</h1>"
     });
+
+    let block = Block::new ("lorem is cool and i love it ".to_string(), BlockType::Text);
+    render_paragraph(block);
+
     let body = hb.render("article-detail", &data).unwrap();
     web::Html::new(body)
 }
