@@ -12,7 +12,10 @@
       <p class="leading-loose text-base text-theme-body">
         {{ article.description }}
       </p>
-      {{{ html }}}
+
+      <div class="prose prose-p:text-red-900">
+        {{ { block } }}
+      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,6 @@
 #![allow(dead_code)]
+use std::fmt::Display;
+
 use super::contents::{Block, BlockType};
 
 pub enum BlockResult {
@@ -6,15 +8,23 @@ pub enum BlockResult {
     Html(String),
 }
 
-pub fn render_paragraph(block: Block) {
+impl Display for BlockResult {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            BlockResult::Invalid => write!(f, "Invalid"),
+            BlockResult::Html(html) => write!(f, "{}", html),
+        }
+    }
+}
+
+pub fn render_paragraph(block: Block) -> BlockResult {
     let Block {
         content,
         block_type,
         ..
     } = block;
-    let _ = match block_type {
+    match block_type {
         BlockType::Text => BlockResult::Html(format!("<p>{}</p>", content)),
         _ => BlockResult::Invalid,
-    };
-    println!("{} {}", block_type, content);
+    }
 }

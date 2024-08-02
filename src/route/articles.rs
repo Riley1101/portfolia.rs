@@ -17,6 +17,9 @@ async fn article_detail(
 
     let conn = pool.get().expect("couldn't get db connection from pool");
     let article = Article::get_article_by_slug(conn, path.clone());
+
+    let block = Block::new ("lorem is cool and i love it ".to_string(), BlockType::Text);
+    let render_block = render_paragraph(block);
     let data = json!({
         "name": "Handlebars",
         "layout":"partials/layout",
@@ -25,10 +28,9 @@ async fn article_detail(
         "nav-aside":"partials/nav-aside",
         "slug": *path,
         "article": to_json(article),
+        "block": render_block.to_string(),
     });
 
-    let block = Block::new ("lorem is cool and i love it ".to_string(), BlockType::Text);
-    render_paragraph(block);
 
     let body = hb.render("article-detail", &data).unwrap();
     web::Html::new(body)
