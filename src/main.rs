@@ -9,6 +9,7 @@ use handlebars::{DirectorySourceOptions, Handlebars};
 use database::client::DatabaseConfig;
 use route::echo;
 use route::home::{ home , about, snippets, videos};
+use route::api::api_edit;
 use route::articles::articles;
 use route::articles::article_detail;
 use actix_files as fs;
@@ -60,6 +61,7 @@ async fn main() -> std::io::Result<()> {
             .service(fs::Files::new("/static", "static"))
             .service(article_detail)
             .service(home)
+            .service(api_edit)
             .service(about)
             .service(articles)
             .service(snippets)

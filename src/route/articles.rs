@@ -17,7 +17,6 @@ async fn article_detail(
 
     let conn = pool.get().expect("couldn't get db connection from pool");
     let article = Article::get_article_by_slug(conn, path.clone());
-
     let block = Block::new ("lorem is cool and i love it ".to_string(), BlockType::Text,Some(Mark::Normal));
     let render_block = render_block(block);
     let data = json!({

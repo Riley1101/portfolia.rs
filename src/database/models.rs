@@ -64,6 +64,7 @@ pub trait ArticleCRUD {
     fn get_all_articles(conn: PoolConnection) -> Vec<Article>;
     fn get_all_article_preview(conn: PoolConnection) -> Article;
     fn get_article_by_slug(conn: PoolConnection, slug: String) -> Article;
+    fn update_article_by_slug(conn: PoolConnection, slug: String, new_body: String) -> bool;
 }
 
 impl ArticleCRUD for Article {
@@ -93,5 +94,13 @@ impl ArticleCRUD for Article {
             .select(Article::as_select())
             .first(&mut conn)
             .expect("error loading posts")
+    }
+
+    fn update_article_by_slug(mut con: PoolConnection, article_slug: String, new_body: String) -> bool {
+        use schema::articles::dsl::*;
+        diesel::update(articles.filter(slug.eq(article_slug)))
+            .set(body.eq(new_body))
+            .execute(&mut con)
+            .is_ok()
     }
 }

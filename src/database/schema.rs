@@ -36,8 +36,4 @@ diesel::table! {
 diesel::joinable!(article_categories -> articles (article_id));
 diesel::joinable!(article_categories -> categories (category_id));
 
-diesel::allow_tables_to_appear_in_same_query!(
-    article_categories,
-    articles,
-    categories,
-);
+diesel::allow_tables_to_appear_in_same_query!(article_categories, articles, categories,);

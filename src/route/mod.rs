@@ -1,6 +1,7 @@
 use actix_web::{post, HttpResponse, Responder};
 
 pub mod home;
+pub mod api;
 pub mod articles;
 
 #[post("/echo")]

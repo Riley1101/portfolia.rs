@@ -15,7 +15,7 @@ dotenvy = "0.15"
 chrono = "0.4.38"
 diesel = { version = "2.2.0", features = ["postgres","chrono","r2d2"] }
 comrak = "0.26.0"
-serde = "1.0.204"
+serde = { version = "1.0.204", features = ["derive"] }
 
 [dependencies.uuid]
 version = "1.10.0"
