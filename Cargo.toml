@@ -16,6 +16,7 @@ chrono = "0.4.38"
 diesel = { version = "2.2.0", features = ["postgres","chrono","r2d2"] }
 comrak = "0.26.0"
 serde = { version = "1.0.204", features = ["derive"] }
+markdown = "0.3.0"
 
 [dependencies.uuid]
 version = "1.10.0"

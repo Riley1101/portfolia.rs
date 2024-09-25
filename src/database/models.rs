@@ -5,6 +5,7 @@ use chrono::NaiveDateTime;
 use core::fmt;
 use diesel::dsl::{AsSelect, Select};
 use diesel::pg::Pg;
+use diesel::result::Error;
 use diesel::{prelude::*, r2d2};
 use diesel::{ExpressionMethods, QueryDsl, RunQueryDsl, SelectableHelper};
 use serde::ser::{Serialize, SerializeStruct};
@@ -93,10 +94,14 @@ impl ArticleCRUD for Article {
             .filter(slug.eq(article_slug))
             .select(Article::as_select())
             .first(&mut conn)
-            .expect("error loading posts")
+            .expect("Not found")
     }
 
-    fn update_article_by_slug(mut con: PoolConnection, article_slug: String, new_body: String) -> bool {
+    fn update_article_by_slug(
+        mut con: PoolConnection,
+        article_slug: String,
+        new_body: String,
+    ) -> bool {
         use schema::articles::dsl::*;
         diesel::update(articles.filter(slug.eq(article_slug)))
             .set(body.eq(new_body))
