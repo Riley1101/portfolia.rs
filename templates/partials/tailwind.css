@@ -15,6 +15,9 @@
   .title {
     font-size: clamp(2.5rem, 5vw, 3rem);
   }
+  .markdown-style {
+    @apply prose-p:break-words prose-p:my-4 prose-p:text-lg prose-p:leading-loose text-theme-body prose-p:font-body prose prose-p:text-theme-body prose-strong:text-theme-body prose-headings:font-theme prose-headings:font-bold prose-headings:text-theme-primary prose-pre:bg-theme-primary-opaque/5 max-w-none;
+  }
 }
 
 ::-moz-selection {

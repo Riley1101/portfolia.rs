@@ -2,7 +2,7 @@
 <div class="page-container gap-4">
   <div class="w-full flex flex-col gap-8">
     <div class="py-8">
-      <h1 class="font-bold text-white title">{{article.title}}</h1>
+      <h1 class="font-bold text-white title font-theme">{{article.title}}</h1>
       <div class="flex items-center justify-between">
         <span class="block my-4 text-theme-accent">
           {{article.updatedat}}
@@ -13,11 +13,8 @@
         {{ article.description }}
       </p>
 
-      <div class="prose prose-p:text-theme-body">
-        {{ { block } }}
-      </div>
+      <div class="markdown-style max-w-full" style="max-width:none;">{{ { block } }}</div>
     </div>
   </div>
 </div>
-{{/inline}} 
-{{> (lookup this "layout")}}
+{{/inline}} {{> (lookup this "layout")}}

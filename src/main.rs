@@ -1,6 +1,7 @@
 mod route;
 mod database;
 mod blocks;
+mod markdown_content;
 
 use actix_web::middleware::Logger;
 use actix_web::{ App, HttpServer, web, middleware};

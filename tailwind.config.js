@@ -24,7 +24,8 @@ module.exports = {
         "theme-body": "#cbd5e1",
       },
       fontFamily: {
-        theme: ["Inter", "sans-serif"],
+        theme: ["Montserrat", "Poppins", "sans-serif"],
+        body: ["Open Sans", "san-serif"],
       },
     },
   },
